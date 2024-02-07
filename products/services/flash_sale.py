@@ -24,8 +24,8 @@ def check_flash_sale(request, product_id):
     except Product.DoesNotExist:
         return Response({"error": "Poduct not found."}, status=status.HTTP_404_NOT_FOUND)
 
-    user_viewed = ProductViewHistory.objects.filter(user=request.user, product=product.exists())
-    upcoming_flash_sale = FlashSale.object.filter(
+    user_viewed = ProductViewHistory.objects.filter(user=request.user, product=product).exists()
+    upcoming_flash_sale = FlashSale.objects.filter(
         product=product,
         start_time__lte=datetime.now() + timedelta(hours=24)
     ).first()
