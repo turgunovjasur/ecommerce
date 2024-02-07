@@ -1,10 +1,9 @@
-import datetime
-import timedelta
-import serializers as serializers
+import datetime, timedelta
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from products.models import FlashSale, Product, ProductViewHistory
+from rest_framework import serializers
 
 
 class FlashSaleListCreateView(generics.ListCreateAPIView):
@@ -44,29 +43,3 @@ def check_flash_sale(request, product_id):
         return Response({
             "message": "Ushbu mahsulot uchun yaqin orada chegirma yo'q!."
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
