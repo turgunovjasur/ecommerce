@@ -23,7 +23,7 @@ def check_flash_sale(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
-        return Response({"error": "Poduct not found."}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"error": "Mahsulot topilmadi"}, status=status.HTTP_404_NOT_FOUND)
 
     user_viewed = ProductViewHistory.objects.filter(user=request.user, product=product).exists()
     upcoming_flash_sale = FlashSale.objects.filter(
@@ -41,6 +41,9 @@ def check_flash_sale(request, product_id):
             "end_time": end_time
         })
     else:
+        print(request.user.id)
+        print(user_viewed)
+        print(upcoming_flash_sale)
         return Response({
             "message": "Ushbu mahsulot uchun yaqin orada chegirma yo'q!."
         })
