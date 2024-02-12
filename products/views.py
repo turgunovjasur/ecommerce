@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from products.filters import ProductFilter
+from products.filters import ProductFilter, CategoryFilter
 from products.models import Product, Review, Category
 from products.serializers import ProductSerializer, ReviewSerializer, CategorySerializer
 
@@ -15,9 +15,19 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
 
 
+class CustomPagination2(PageNumberPagination):
+    page_size = 3
+
+
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+    pagination_class = CustomPagination2
+
+    filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
+    filterset_class = CategoryFilter
+    search_fields = ['name', 'description']
 
 
 class CustomPagination(PageNumberPagination):
