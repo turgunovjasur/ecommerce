@@ -1,14 +1,22 @@
+from django_filters import rest_framework as django_filters
+from rest_framework import filters
 from datetime import datetime, timedelta
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
 
 from rest_framework.response import Response
+
+from products.filters import FlashSaleFilter
 from products.models import FlashSale, Product, ProductViewHistory
 from rest_framework import serializers
 
 
 class FlashSaleListCreateView(generics.ListCreateAPIView):
     queryset = FlashSale.objects.all()
+
+    filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
+    filterset_class = FlashSaleFilter
+    search_fields = ['name', 'description']
 
     class FlashSaleSerializer(serializers.ModelSerializer):
         class Meta:
