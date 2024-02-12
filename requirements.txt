@@ -1,5 +1,4 @@
 Django==5.0.1
 djangorestframework==3.14.0
 
-serializers~=0.2.4
-django-timedeltafield~=0.7.10
+django-filter~=23.5
