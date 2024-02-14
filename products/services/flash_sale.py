@@ -49,9 +49,6 @@ def check_flash_sale(request, product_id):
             "end_time": end_time
         })
     else:
-        print(request.user.id)
-        print(user_viewed)
-        print(upcoming_flash_sale)
         return Response({
             "message": "Ushbu mahsulot uchun yaqin orada chegirma yo'q!."
         })

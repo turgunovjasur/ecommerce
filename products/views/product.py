@@ -1,34 +1,8 @@
-from django.db import models
-from django_filters import rest_framework as django_filters
-from rest_framework import viewsets, filters
-from rest_framework.decorators import action
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
-from products.filters import ProductFilter, CategoryFilter
-from products.models import Product, Review, Category
-from products.serializers import ProductSerializer, ReviewSerializer, CategorySerializer
-
-
-class ReviewViewSet(viewsets.ModelViewSet):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-
-
-class CustomPagination2(PageNumberPagination):
-    page_size = 3
-
-
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
-    pagination_class = CustomPagination2
-
-    filter_backends = (django_filters.DjangoFilterBackend, filters.SearchFilter)
-    filterset_class = CategoryFilter
-    search_fields = ['name', 'description']
+from products.filters import ProductFilter
+from products.models import Product
+from products.permissions import IsStaffOrReadOnly
+from products.serializers import ProductSerializer
 
 
 class CustomPagination(PageNumberPagination):
@@ -36,7 +10,7 @@ class CustomPagination(PageNumberPagination):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]  # default = AllowAny
+    permission_classes = [IsStaffOrReadOnly]  # default =  AllowAny
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -64,6 +38,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def top_rated(self, request):
+
         # Assuming a related name of "reviews" from Review model to Product model
         top_products = Product.objects.annotate(avg_rating=models.Avg('reviews__rating')).order_by('-avg_rating')[:2]
         serializer = ProductSerializer(top_products, many=True)
