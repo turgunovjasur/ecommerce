@@ -14,15 +14,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
 
-class ReviewViewSet(viewsets.ModelViewSet): #
+class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
 
-class CategoryViewSet(viewsets.ModelViewSet): #
-    pagination_class = [IsAuthenticated]
+class CategoryViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]  # default =  AllowAny
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
 
