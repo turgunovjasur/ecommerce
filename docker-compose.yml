@@ -11,13 +11,12 @@ services:
       - .env
 
   rabbitmq:
-    image: rabbitmq:management
+    image: rabbitmq:latest
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
     ports:
       - "5672:5672"
-      - "15672:15672"
 
 
   redis:
