@@ -140,6 +140,8 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ALGORITHM': 'HS256',
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=120),  # access - eskiradigan token
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),  # refresh - tiklaydigan token
 }
