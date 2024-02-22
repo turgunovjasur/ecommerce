@@ -23,7 +23,7 @@ class SMSLoginViewSet(viewsets.ViewSet):
             verification_code = str(random.randint(100000, 999999))
 
             # Send SMS via Infobip
-            url = 'https://43vvd1.api.infobip.com/sms/2/text/advanced'
+            url = 'https://y3j8pp.api.infobip.com/sms/2/text/advanced'
             headers = {
                 'Authorization': SMS_KEY,
                 'Content-Type': 'application/json',

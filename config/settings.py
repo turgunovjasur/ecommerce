@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     'products',
-    'custom_auth'
+    'custom_auth',
+    'billing'
 ]
 
 MIDDLEWARE = [
@@ -172,4 +173,4 @@ CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND')  # Redis as a re
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 SMS_KEY = os.environ.get('SMS_KEY')
-CSRF_TRUSTED_ORIGINS = ["https://*", "http://*"]
+CSRF_TRUSTED_ORIGINS = ["https://*", "https://y3j8pp.api.infobip.com/sms/2/text/advanced"]

@@ -13,6 +13,6 @@ def notify_admin(sender, instance, created, **kwargs):
             order_id=instance.id,
             product_name=instance.product.name,
             quantity=instance.quantity,
-            customer_username=instance.customer.username,
+            customer_username=instance.customer.phone_number,
             phone_number=instance.phone_number
         )
